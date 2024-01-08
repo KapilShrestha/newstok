@@ -1,9 +1,7 @@
-<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./src/img/newstok.svg" />
+    <link rel="icon" type="image/svg+xml" href="../public/assets/img/newstok.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +26,7 @@
             <img src="../public/assets/img/newstok.svg" class="w-10 h-10 rounded object-cover" alt="">
             <span class="text-lg font-bold text-white">Admin</span>
         </a>
-        <form class="mt-4">
+        <form class="mt-4" id="side-search" name="side-search">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -42,37 +40,39 @@
                 <input type="search" id="default-search"
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search" required>
-                <button type="submit" class="absolute end-2 bottom-0.5   px-4 py-4 btn btn-primary  ">Search</button>
+                <button type="submit" class="absolute end-2 top-0.5 btn btn-primary">Search</button>
             </div>
         </form>
-        <ul class="mt-4">
+        <ul class="mt-4 ">
             <li class="mb-1">
-                <a href="#" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md">
+                <a href="#" id="admin-category" class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
                     <i class="ri-file-list-line mr-3 text-lg"></i>
                     <span class="text-sm">Category</span>
                 </a>
             </li>
             <li class="mb-1">
-                <a href="#" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md">
+                <a href="#" id="admin-posts" class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
                     <i class="ri-article-line mr-3 text-lg"></i>
                     <span class="text-sm">Posts</span>
                 </a>
             </li>
             <li class="mb-1">
-                <a href="#" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md">
+                <a href="#" id="admin-comments" class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
                     <i class="ri-chat-4-line mr-3 text-lg"></i>
                     <span class="text-sm">Comments</span>
                 </a>
             </li>
         </ul>
     </div>
+    <!-- end: sidebar -->
 
 
 
 
-
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="../src/main.ts"></script>
+    <script type="module" src="../src/admin.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 
 </body>
 </html>
+           

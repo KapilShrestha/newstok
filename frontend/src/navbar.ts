@@ -1,31 +1,34 @@
-// export function setupCounter(element: HTMLButtonElement) {
-//   let counter = 0
-//   const setCounter = (count: number) => {
-//     counter = count
-//     element.innerHTML = `count is ${counter}`
-//   }
-//   element.addEventListener('click', () => setCounter(counter + 1))
-//   setCounter(0)
-// }
+document.addEventListener("DOMContentLoaded", () => {
+  const profileButton = document.getElementById('user-menu-button');
+  const profileDropdown = document.getElementById('profile-dropdown');
 
+  if (profileButton && profileDropdown) {
+      // Variable to track whether the dropdown is open or closed
+      let isDropdownOpen = false;
 
-const menu: HTMLElement | null = document.getElementById('menu');
-const toggleButton: HTMLElement | null = document.getElementById('toggleButton');
+      // Function to close the dropdown
+      const closeDropdown = () => {
+          profileDropdown.classList.add('hidden');
+          isDropdownOpen = false;
+      };
 
-if (menu && toggleButton) {
-  console.log('menu and toggleButton found');
-  toggleButton.addEventListener('click', () => {
-    if (menu.classList.contains('hidden')) {
-      menu.classList.remove('hidden', 'ease-in', 'duration-75', 'opacity-0', 'scale-95');
-      menu.classList.add('ease-out', 'duration-100', 'opacity-100', 'scale-100');
-    } else {
-      menu.classList.remove('ease-out', 'duration-100', 'opacity-100', 'scale-100');
-      menu.classList.add('ease-in', 'duration-75', 'opacity-0', 'scale-95');
+      // Toggle the dropdown when the profile button is clicked
+      profileButton.addEventListener('click', () => {
+          if (isDropdownOpen) {
+              closeDropdown();
+          } else {
+              profileDropdown.classList.remove('hidden');
+              isDropdownOpen = true;
+          }
+      });
 
-      // Hide the menu after the transition is complete
-      setTimeout(() => {
-        menu.classList.add('hidden');
-      }, 75);
-    }
-  });
-}
+      // Close the dropdown if user clicks outside of it
+      document.addEventListener('click', (event) => {
+          const target = event.target as HTMLElement;
+
+          if (!profileButton.contains(target) && !profileDropdown.contains(target)) {
+              closeDropdown();
+          }
+      });
+  }
+});
