@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "homepage": "https://kapilshrestha.github.io/newstok/frontend",
   "scripts": {
-    "predeploy": "npm run build",	
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite dev",
     "build": "tsc && vite build",
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "remixicon": "^4.0.1",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "universal-router": "^9.2.0"
   }
 }

@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="../public/assets/img/newstok.svg" />
@@ -14,57 +15,82 @@
 </head>
 
 <body>
-    <div class="flex justify-end m-2">
+    <!-- <div class="flex justify-end m-2">
         <input type="checkbox" class="toggle toggle-xs justify-right" checked data-toggle-theme="dark,light" />
-    </div>
+    </div> -->
 
 
     <!-- start: sidebar -->
-    <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4">
+    <div class="flex">
+        <div class="left-0 top-0 w-64 h-screen bg-gray-900 p-4">
 
-        <a href="#" class="flex items-center pb-4 border-b border-b-gray-600 gap-8">
-            <img src="../public/assets/img/newstok.svg" class="w-10 h-10 rounded object-cover" alt="">
-            <span class="text-lg font-bold text-white">Admin</span>
-        </a>
-        <form class="mt-4" id="side-search" name="side-search">
-            <label for="default-search"
-                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                        xmlns="./src/img/search.svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
+            <a href="#" class="flex items-center pb-4 border-b border-b-gray-600 gap-8">
+                <img src="../public/assets/img/newstok.svg" class="w-10 h-10 rounded object-cover" alt="">
+                <span class="text-lg font-bold text-white">Admin</span>
+            </a>
+            <form class="mt-4" id="side-search" name="side-search">
+                <label for="default-search"
+                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="./src/img/search.svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input type="search" id="default-search"
+                        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search" required>
+                    <button type="submit" class="absolute end-2 top-0.5 btn btn-primary">Search</button>
                 </div>
-                <input type="search" id="default-search"
-                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search" required>
-                <button type="submit" class="absolute end-2 top-0.5 btn btn-primary">Search</button>
+            </form>
+            <ul class="mt-4">
+                <li class="mb-1">
+                    <a href="#" id="admin-posts" data-target="admin-posts"
+                        class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
+                        <i class="ri-article-line mr-3 text-lg"></i>
+                        <span class="text-sm">Posts</span>
+                    </a>
+                </li>
+                <li class="mb-1">
+                    <a href="#" id="admin-categories" data-target="admin-categories"
+                        class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md">
+                        <i class="ri-file-list-line mr-3 text-lg"></i>
+                        <span class="text-sm">Categories</span>
+                    </a>
+                </li>
+                
+                <li class="mb-1">
+                    <a href="#" id="admin-comments" data-target="admin-comments"
+                        class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
+                        <i class="ri-chat-4-line mr-3 text-lg"></i>
+                        <span class="text-sm">Comments</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- end: sidebar -->
+
+        <div id="right-menu">
+
+        </div>
+      
+
+        <!-- start: Right menu -->
+        <div class="w-full">
+            <div id="admin-posts-menu" class="hidden">
+                Posts
             </div>
-        </form>
-        <ul class="mt-4 ">
-            <li class="mb-1">
-                <a href="#" id="admin-category" class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
-                    <i class="ri-file-list-line mr-3 text-lg"></i>
-                    <span class="text-sm">Category</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="#" id="admin-posts" class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
-                    <i class="ri-article-line mr-3 text-lg"></i>
-                    <span class="text-sm">Posts</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="#" id="admin-comments" class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
-                    <i class="ri-chat-4-line mr-3 text-lg"></i>
-                    <span class="text-sm">Comments</span>
-                </a>
-            </li>
-        </ul>
+            <div id="admin-categories-menu" class="hidden">
+                Categories
+            </div>
+            
+            <div id="admin-comments-menu" class="hidden">comments</div>
+        </div>
+        <!-- end: Right menu -->
+
     </div>
-    <!-- end: sidebar -->
 
 
 
@@ -74,5 +100,5 @@
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 
 </body>
+
 </html>
-           
