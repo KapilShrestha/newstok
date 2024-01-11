@@ -13,19 +13,21 @@
         <input type="checkbox" class="toggle toggle-xs justify-right" checked data-toggle-theme="dark,light" />
     </div>
     <div class="text-center items-center mt-10 ">
-        <div class="inline-block shadow-md  shadow-slate-400 rounded-md p-5 ">
+        <form class="inline-block shadow-md  shadow-slate-400 rounded-md p-5 ">
             <div class="flex justify-center">
                 <img class="relative w-[50%] my-5 " src="/assets/img/newstok_text.png" alt="">
             </div>
             <div>
-                <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="text"
-                    name="" id="" placeholder="Email">
+                <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="email"
+                    name="" id="login-email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Invalid email">
+                    <div id="email-error" style="color: red;"></div>
+
             </div>
             <div>
-                <input class="w-[70%] mb-2 p-1 rounded-sm border-2 border-slate-300" type="text" name="" id=""
-                    placeholder="Password">
+                <input class="w-[70%] mb-2 p-1 rounded-sm border-2 border-slate-300" type="password" name="" id="login-password"
+                    placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
             </div>
-            <button class="w-[70%] btn btn-primary">Log In</button>
+            <button type="submit" class="w-[70%] btn btn-primary" id="login-button">Log In</button>
             <div class="flex gap-6 items-center justify-center">
                 <hr class="border-2 border-slate-400">
                 <p class="text-slate-400 my-3">OR</p>
@@ -36,14 +38,15 @@
                 <p class="text-blue-900 font-bold my-3 cursor-pointer">Log in with Google</p>
             </div>
             <div class="my-2 text-sky-900 cursor-pointer">Forgot password?</div>
-        </div>
+        </form>
         <div class="mt-4 p-4 ">
-            Don't have an account? <span class="cursor-pointer text-sky-700 font-bold">Sign up</span>
+            Don't have an account? <a href="./signup.html" class="cursor-pointer text-sky-700 font-bold">Sign up</a>
         </div>
     </div>
 
 
     <script type="module" src="../src/main.ts"></script>
+    <script type="module" src="../src/login.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 
 </body>

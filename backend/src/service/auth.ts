@@ -60,6 +60,7 @@ export const login = async (body: ISignUp) => {
         };
     } catch (error: any) {
         console.log(error.message);
+        return { error: error.message };
     }
 }
 

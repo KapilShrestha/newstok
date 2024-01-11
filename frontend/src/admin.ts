@@ -1,60 +1,59 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.admin-list');
-    const hiddenMenus = document.querySelectorAll('.hidden');
+    // const postsButton = document.getElementById('admin-posts');
+    // const categoriesButton = document.getElementById('admin-categories');
+    // const commentsButton = document.getElementById('admin-comments');
 
-    // Initially setting 'Posts' menu to be displayed
-    const postsButton = document.getElementById('admin-posts');
-    const postsMenu = document.getElementById('admin-posts-menu');
-    const categoriesMenu = document.getElementById('admin-categories-menu');
-    const commentsMenu = document.getElementById('admin-comments-menu');
 
-    if (postsButton && postsMenu) {
-        postsButton.classList.add('bg-gray-950');
-        postsMenu.classList.remove('hidden');
-        postsMenu.classList.add('block');
-    }
+    const menu = document.getElementById('menu-contents') as HTMLDivElement;
+    console.log(navLinks);
     
-
     navLinks.forEach((link) => {
+        console.log("hello", link);
         link.addEventListener('click', (event) => {
+        
+            console.log("clicked",event.target);
             event.preventDefault();
-            const targetId = link.getAttribute('data-target');
+            const target = event.target as HTMLDivElement;
 
-
-            // for changing url path used in routing
-            // window.location.href = '/auth/admin/' + targetId + '/';
-
-            if (postsMenu) {
+        // Get the id of the clicked element
+        const id = target.id;
+        console.log("id", id);
+            if (id==='admin-posts') {
                 // Fetch content from post.html
                 fetch('/auth/admin-posts.html')
                     .then(response => response.text())
                     .then(html => {
                         // Set the innerHTML of the admin-posts-menu div to the fetched HTML
-                        postsMenu.innerHTML = html;
+                        menu.innerHTML = html;
                     })
                     .catch(error => {
                         console.warn(error);
                     });
             }
-            if (categoriesMenu) {
+
+            if (id==='admin-categories') {
                 // Fetch content from post.html
                 fetch('/auth/admin-categories.html')
                     .then(response => response.text())
                     .then(html => {
                         // Set the innerHTML of the admin-posts-menu div to the fetched HTML
-                        categoriesMenu.innerHTML = html;
+                        menu.innerHTML = html;
+                        console.log("hello", menu);
                     })
                     .catch(error => {
                         console.warn(error);
                     });
             }
-            if (commentsMenu) {
+
+            if (id==='admin-comments') {
                 // Fetch content from post.html
                 fetch('/auth/admin-comments.html')
                     .then(response => response.text())
                     .then(html => {
                         // Set the innerHTML of the admin-posts-menu div to the fetched HTML
-                        commentsMenu.innerHTML = html;
+                        menu.innerHTML = html;
+                        console.log("hello", menu);
                     })
                     .catch(error => {
                         console.warn(error);
@@ -62,27 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
 
-                        
-            navLinks.forEach((otherLink) => {
-                otherLink.classList.remove('bg-gray-950');
-                
-            });            
-            link.classList.add('bg-gray-950');
-            
-            hiddenMenus.forEach((menu) => {
-                menu.classList.add('hidden');
-                menu.classList.remove('block');
-            });
-        
-            const targetMenu = document.getElementById(targetId + '-menu');
-            if(targetMenu) {
-                targetMenu.classList.remove('hidden');
-                targetMenu.classList.add('block');
-            }
         });
     });
 });
-
-
-
-
