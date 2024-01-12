@@ -1,5 +1,6 @@
 // routes/categoryRoutes.ts
 
+
 import express, { Request, Response } from 'express';
 import { createCategory } from '../service/categories';
 

@@ -16,7 +16,6 @@ export const signup = async (body: ISignUp) => {
     bcrypt.hash(body.password, SALT_ROUNDS, async (err, hash) => {
         console.log({ hash });
         const user = {
-            // id: users.length + 1,
             name: body.name,
             email: body.email,
             password: hash,
@@ -58,4 +57,6 @@ export const login = async (body: ISignUp) => {
         return { error: error.message };
     }
 }
+
+
 
