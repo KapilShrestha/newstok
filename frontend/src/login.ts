@@ -3,8 +3,11 @@ console.log("login")
 const loginEmail = document.getElementById('login-email') as HTMLInputElement;
 const loginPassword = document.getElementById('login-password') as HTMLInputElement;
 const loginButton = document.getElementById('login-button') as HTMLButtonElement;
+const loginForm = document.getElementById('login-form') as HTMLFormElement;
 
-loginButton.addEventListener('submit', (event) => {
+
+loginForm?.addEventListener('submit', (event) => {
+    
     event.preventDefault();
     const email = loginEmail.value;
     const password = loginPassword.value;

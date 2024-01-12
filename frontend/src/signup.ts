@@ -3,8 +3,9 @@ const signupEmail = document.getElementById('signup-email') as HTMLInputElement;
 const signupPassword = document.getElementById('signup-password') as HTMLInputElement;
 const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
 const signupName = document.getElementById('signup-name') as HTMLInputElement;
+const signupForm = document.getElementById('signup-form') as HTMLFormElement;
 
-signupButton.addEventListener('submit', (event) => {
+signupForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const email = signupEmail.value;
     const password = signupPassword.value;

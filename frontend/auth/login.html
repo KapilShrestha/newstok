@@ -5,15 +5,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/img/newstok.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/styles/style.css">
+    <script type="module" src="../src/main.ts"></script>
 
     <title>Login &#x2022; Newstok</title>
 </head>
 <body>
-    <div class="flex justify-end m-2">
+    <!-- <div class="flex justify-end m-2">
         <input type="checkbox" class="toggle toggle-xs justify-right" checked data-toggle-theme="dark,light" />
-    </div>
+    </div> -->
     <div class="text-center items-center mt-10 ">
-        <form class="inline-block shadow-md  shadow-slate-400 rounded-md p-5 ">
+        <form class="inline-block shadow-md  shadow-slate-400 rounded-md p-5 " id="login-form">
             <div class="flex justify-center">
                 <img class="relative w-[50%] my-5 " src="/assets/img/newstok_text.png" alt="">
             </div>
@@ -34,7 +36,7 @@
                 <hr class="border-2 border-slate-400">
             </div>
             <div class="flex gap-4 relative ml-[24%] my-2">
-                <img class="w-4" src="/assets/img/google.svg" alt="">
+                <img class="w-4" src="/assets/img/google.svg" alt="" loading="lazy">
                 <p class="text-blue-900 font-bold my-3 cursor-pointer">Log in with Google</p>
             </div>
             <div class="my-2 text-sky-900 cursor-pointer">Forgot password?</div>
@@ -45,7 +47,7 @@
     </div>
 
 
-    <script type="module" src="../src/main.ts"></script>
+    
     <script type="module" src="../src/login.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 

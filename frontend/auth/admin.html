@@ -1,3 +1,4 @@
+<!-- frontend/auth/admin.html -->
 <html lang="en">
 
 <head>
@@ -8,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/styles/style.css">
 
 
 
@@ -23,23 +25,7 @@
                 <img src="../public/assets/img/newstok.svg" class="w-10 h-10 rounded object-cover" alt="">
                 <span class="text-lg font-bold text-white">Admin</span>
             </a>
-            <form class="mt-4" id="side-search" name="side-search">
-                <label for="default-search"
-                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="./src/img/search.svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                    <input type="search" id="default-search"
-                        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search" required>
-                    <button type="submit" class="absolute end-2 top-0.5 btn btn-primary">Search</button>
-                </div>
-            </form>
+           
             <ul class="mt-4">
                 <li class="mb-1">
                     <a href="#" id="admin-posts" data-target="admin-posts"
@@ -55,7 +41,13 @@
                         Categories
                     </a>
                 </li>
-                
+                <li class="mb-1">
+                    <a href="#" id="admin-add-posts" data-target="admin-add-posts"
+                        class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
+                        <i class="ri-chat-4-line mr-3 text-lg"></i>
+                        Add Posts
+                    </a>
+                </li>
                 <li class="mb-1">
                     <a href="#" id="admin-comments" data-target="admin-comments"
                         class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
@@ -64,22 +56,24 @@
                     </a>
                 </li>
                 <li class="mb-1">
-                    <a href="#" id="admin-add-posts" data-target="admin-add-posts"
+                    <a href="#" id="admin-users" data-target="admin-users"
                         class="admin-list flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 rounded-md active:bg-gray-950">
-                        <i class="ri-chat-4-line mr-3 text-lg"></i>
-                        Add Posts
+                        <i class="ri-user-line mr-3 text-lg"></i>
+                        Users
                     </a>
                 </li>
+
             </ul>
         </div>
         <!-- end: sidebar -->
-      
+
 
         <!-- start: Right menu -->
         <div class="w-full" id="menu-contents">
 
         </div>
         <!-- end: Right menu -->
+        
 
     </div>
 
@@ -87,6 +81,7 @@
 
 
     <script type="module" src="../src/main.ts"></script>
+    <script type="module" src="../src/admin-categories.ts"></script>
     <script type="module" src="../src/admin.ts"></script>
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 

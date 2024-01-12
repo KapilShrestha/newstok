@@ -1,4 +1,4 @@
-import "./styles/style.css"
+
 
 const accessToken = localStorage.getItem('accessToken') || null;
 
@@ -12,18 +12,18 @@ if (accessToken) {
   
 } else {
   // User is not logged in
-  if (window.location.pathname.endsWith('/auth/login.html')) {
+  if (window.location.pathname.endsWith('/auth/login.html') || window.location.pathname.endsWith('/auth/signup.html')) {
     // Already on the login page, no need to redirect
   } else {
     // Redirect to login page if not already there
-    // window.location.replace('/auth/login.html');
+    window.location.replace('/auth/login.html');
   }
 }
 
 // Additional logic for redirecting to index page after successful login
-if (accessToken && !window.location.pathname.endsWith('/auth/login.html') && !window.location.pathname.endsWith('/index.html')) {
-  // Redirect to index page after successful login
-  window.location.replace('/index.html');
-}
+// if (accessToken && !window.location.pathname.endsWith('/auth/login.html')) {
+//   // Redirect to index page after successful login
+//   window.location.replace('/index.html');
+// }
 
 

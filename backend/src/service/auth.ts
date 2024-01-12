@@ -5,10 +5,10 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 import config from '../config';
-import { allUsers, users } from '../model/users';
+
+import {  createUser } from '../model/users';
 import { ISignUp } from '../interface/auth';
 import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from '../constant/jwt';
-import { getUsers } from '../model/users';
 
 const SALT_ROUNDS = 10;
 
@@ -21,12 +21,7 @@ export const signup = async (body: ISignUp) => {
             email: body.email,
             password: hash,
         };
-        // await users.push(user);
-        await prisma.user.create({
-            data: {
-              ...user
-            },
-          })
+        await createUser(user);
 
     });
     

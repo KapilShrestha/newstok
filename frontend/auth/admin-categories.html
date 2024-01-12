@@ -1,21 +1,16 @@
+<!-- frontend/auth/admin-categories.html -->
 <h1>admin categories</h1>
 <div class="flex justify-around items-center gap-7">
-
-    <input type="text" name="" id="" class="search-categories" placeholder="search categories">
     <button type="" class="btn btn-primary" onclick="addCategoriesModal.showModal()">Add Categories</button>
 </div>
-
-
-
-
 
 <!-- Open the modal using addCategoriesModal.showModal() method -->
 <dialog id="addCategoriesModal" class="modal">
     <div class="modal-box">
         <p>Category Name</p>
         <div class="flex justify-around items-center">
-            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-            <button class="btn btn-primary">Add</button>
+            <input id="addCategoriesInput" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <button id="addCategoriesButton" class="btn btn-primary" >Add</button>
         </div>
 
     </div>
