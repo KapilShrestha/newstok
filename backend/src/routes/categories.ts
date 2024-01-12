@@ -2,9 +2,11 @@
 
 
 import express, { Request, Response } from 'express';
+import { getAllCategories } from '../controller/categories';
 import { createCategory } from '../service/categories';
-
 const router = express.Router();
+
+router.get('/', getAllCategories);
 
 router.post('/add', async (req: Request, res: Response) => {
   try {

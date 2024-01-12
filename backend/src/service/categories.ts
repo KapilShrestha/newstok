@@ -5,6 +5,17 @@ import { CategoryCreateInput } from '../model/categories';
 
 const prisma = new PrismaClient();
 
+// Get all categories
+export const getAllCategories = async () => {
+
+  const categories = await prisma.user.findMany({
+
+  });
+  return categories;
+  
+
+}
+
 export const createCategory = async (data: CategoryCreateInput) => {
   try {
     const newCategory = await prisma.category.create({
