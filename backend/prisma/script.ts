@@ -10,8 +10,6 @@ async function main() {
           password: '123456789',
         },
       })
-      console.log(user)
-  // ... you will write your Prisma Client queries here
 }
 
 main()
