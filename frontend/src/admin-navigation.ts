@@ -2,7 +2,7 @@
 
 
 import { fetchAndRenderUsers } from './admin-users';
-import { addCategories } from './admin-categories';
+import { addCategories, fetchAndRenderCategories } from './admin-categories';
 const menu = document.getElementById('menu-contents') as HTMLDivElement;
     const categoriesButton = document.getElementById('admin-categories') as HTMLDivElement;
     const navLinks = document.querySelectorAll('.admin-list');
@@ -38,6 +38,7 @@ export function setNavigation() {
                     break;
                 case 'admin-categories':
                     fetchAndSetContent('/auth/admin-categories.html');
+                    fetchAndRenderCategories();
                     break;
                 case 'admin-comments':
                     fetchAndSetContent('/auth/admin-comments.html');

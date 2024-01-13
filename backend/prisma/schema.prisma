@@ -18,7 +18,7 @@ model User {
   password String
   isAdmin  Boolean @default(false)
   isAuthor Boolean @default(false)
-  posts    Post[]
+  // posts    Post[]
 }
 
 model Post {
@@ -28,12 +28,12 @@ model Post {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   published  Boolean  @default(false)
-  author     User     @relation(fields: [authorId], references: [id])
-  authorId   String
+  // author     User?     @relation(fields: [authorId], references: [id])
+  // authorId   String
   categories Category @relation(fields: [categoryId], references: [id])
   categoryId String
-  photos     Photo[]   
-  photoId    String?
+  // photo     Photo?  
+  
 }
 
 model Category {
@@ -47,8 +47,8 @@ model Photo{
   name      String
   url       String
   createdAt DateTime @default(now())
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    String
+  // posts     Post @relation(fields: [postId], references: [id])
+  // postId    String? @unique
 }
 
 enum Role {

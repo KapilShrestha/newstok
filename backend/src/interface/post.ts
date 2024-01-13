@@ -1,5 +1,6 @@
 export interface IPost {
     title: string;
-    email: string;
-    password: string;
+    content: string;
+    category: string;
+    userId?: string;
 }

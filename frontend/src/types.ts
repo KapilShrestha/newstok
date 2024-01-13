@@ -1,5 +1,5 @@
 // types.ts
-export interface User {
+export interface IUser {
   email: string;
   role:  "ADMIN"|"AUTHOR"|"BASIC";
   name: string | null;
@@ -8,5 +8,16 @@ export interface User {
 
     // Add any other properties you have in your User type
   }
+
+  export interface ICategory {
+    id: string;
+    name: string;
+    // role:  "ADMIN"|"AUTHOR"|"BASIC";
+    // name: string | null;
+    // isAdmin: boolean;
+    // isAuthor: boolean;
+  
+      // Add any other properties you have in your User type
+    }
 
   

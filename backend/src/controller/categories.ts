@@ -1,3 +1,5 @@
+// controller/categories.ts
+
 import { Request, Response } from "express";
 import * as categoryService from '../service/categories';
 

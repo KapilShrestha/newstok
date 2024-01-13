@@ -1,13 +1,13 @@
 // frontend/src/user.ts
 
-import { User } from './types';
+import { IUser } from './types';
 
 
 // function to fetch and render Users from the database
 export function fetchAndRenderUsers() {
     fetch('http://localhost:3000/user')
         .then(response => response.json())
-        .then((data: User[]) => {
+        .then((data: IUser[]) => {
             renderUsers(data);
         })
         .catch(error => {
@@ -16,12 +16,12 @@ export function fetchAndRenderUsers() {
 }
 
 //   function to render users
-function renderUsers(users: User[]) {
-    const tbody = document.querySelector('tbody');
-    if (!tbody) return;
+function renderUsers(users: IUser[]) {
+    const tbodyUsers = document.getElementById('tbody-admin-users');
+    if (!tbodyUsers) return;
 
     // Clear existing rows
-    tbody.innerHTML = '';
+    tbodyUsers.innerHTML = '';
 
     users.forEach(user => {
         const row = document.createElement('tr');
@@ -67,6 +67,6 @@ function renderUsers(users: User[]) {
         adminCell.innerHTML = '<label><input type="checkbox" class="checkbox" /></label>';
         row.appendChild(adminCell);
 
-        tbody.appendChild(row);
+        tbodyUsers.appendChild(row);
     });
 }

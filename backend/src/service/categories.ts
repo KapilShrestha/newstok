@@ -8,9 +8,7 @@ const prisma = new PrismaClient();
 // Get all categories
 export const getAllCategories = async () => {
 
-  const categories = await prisma.user.findMany({
-
-  });
+  const categories = await prisma.category.findMany();
   return categories;
   
 
