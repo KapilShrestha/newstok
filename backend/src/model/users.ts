@@ -1,9 +1,9 @@
-// model/users.ts
-import { PrismaClient } from '@prisma/client'	
-const prisma = new PrismaClient()
+// backend/src/model/users.ts
+
+import { prismaClient } from '../../prisma/prismaClient'
 
 export const createUser = async(data: any) => {
-   return await prisma.user.create({
+   return await prismaClient.user.create({
         data: {
           ...data
         },

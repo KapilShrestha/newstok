@@ -1,4 +1,5 @@
 //frontend/src/admin-categories.ts
+
 import { ICategory } from './types';
 let currentPage = 1;
 
@@ -6,10 +7,15 @@ let currentPage = 1;
 // to function to add categories
 export function addCategories() {
     const addCategoriesButton = document.getElementById('addCategoriesButton') as HTMLButtonElement;
+    const addCategoriesModal = document.getElementById('addCategoriesModal') as HTMLDialogElement;
+   
     addCategoriesButton?.addEventListener('click', () => {
         console.log('addCategoriesButton clicked');
         const categoryInput = document.getElementById('addCategoriesInput') as HTMLInputElement;
         const categoryName = categoryInput.value;
+
+        // Log the request payload before making the fetch call
+        console.log('Request Payload:', JSON.stringify({ name: categoryName }));
 
         fetch('http://localhost:3000/categories/add', {
             method: 'POST',
@@ -22,9 +28,14 @@ export function addCategories() {
             .then(data => {
                 if (data.success) {
                     console.log('Category added successfully:', data.category);
+                    showMessage(data.message, 'success');
+                    addCategoriesModal.close();
+
                     location.reload();
                 } else {
                     console.error('Failed to add category. Error:', data.error || 'Unknown error');
+                    // Display error message
+                    showMessage(data.message, 'error');
                 }
             })
             .catch(error => {
@@ -33,13 +44,25 @@ export function addCategories() {
     });
 }
 
+// Add the showMessage function with explicit types
+function showMessage(message: string, type: 'success' | 'error') {
+    const alertMessage = document.getElementById('alert-message') as HTMLDivElement;
+    
+    alertMessage.textContent = message;
+    alertMessage.classList.remove('success', 'error');
+    alertMessage.classList.add(type, 'visible');
+    setTimeout(() => {
+        alertMessage.classList.remove('visible');
+    }, 5000); // Hide the message after 5 seconds (adjust as needed)
+}
+
 
 // function to fetch and render Categories from the database
 export function fetchAndRenderCategories() {
     fetch('http://localhost:3000/categories')
         .then(response => response.json())
-        .then((data: ICategory[]) => {
-            renderCategories(data);
+        .then((data: {data: ICategory[]}) => {
+            renderCategories(data.data);
             // console.log(data);
         })
         .catch(error => {

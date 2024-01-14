@@ -4,8 +4,8 @@ import { getAllPosts } from '../controller/posts';
 
 const router = Router();
 
-router.post("/add", addPost);
 router.get("/", getAllPosts);
+router.post("/add", addPost);
 
 
 export default router;

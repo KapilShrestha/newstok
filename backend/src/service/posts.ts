@@ -1,3 +1,5 @@
+// backend/src/service/posts.ts
+
 import { prismaClient } from "../../prisma/prismaClient";
 import { IPost } from "../interface/post";
 
@@ -30,6 +32,7 @@ export const getAllPostsService = async () => {
     try {
         const posts = await prismaClient.post.findMany({
             include: {  categories: true }});
+          
             return posts;
         }
         catch (error) {
@@ -38,6 +41,7 @@ export const getAllPostsService = async () => {
         }
 
 }
+
 
 // Example validation function
 export const isValidCategoryService = async (categoryId: string): Promise<boolean> => {

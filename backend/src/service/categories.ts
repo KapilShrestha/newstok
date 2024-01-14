@@ -1,30 +1,58 @@
 // service/categories.ts
 
-import { PrismaClient } from '@prisma/client';
-import { CategoryCreateInput } from '../model/categories';
 
-const prisma = new PrismaClient();
+import { prismaClient } from '../../prisma/prismaClient';
+import { ICategories } from '../interface/categories';
 
-// Get all categories
-export const getAllCategories = async () => {
-
-  const categories = await prisma.category.findMany();
-  return categories;
-  
-
+export const addCategoryService = async ({name}:ICategories) => {
+    try {
+        const lowercaseName = name.toLowerCase(); // Convert to lowercase
+        const existingCategory = await prismaClient.category.findUnique({
+            where: {
+                name: lowercaseName,
+            }
+        });
+        if (existingCategory) {
+            throw new Error("Category already exists");
+        }
+        const newCategory = await prismaClient.category.create({
+            data: {
+                name,
+            }
+        });
+        return newCategory;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(`Failed to add category. Error: ${error.message}.`);
+    }
 }
 
-export const createCategory = async (data: CategoryCreateInput) => {
-  try {
-    const newCategory = await prisma.category.create({
-      data: {
-        name: data.name, // Make sure 'data' has a 'name' property
-      },
+export const getAllCategoriesService = async () => {
+    try {
+        const categories = await prismaClient.category.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
     });
+        return {data: categories};
+    } catch (error) {
+        return { error: 'An error occurred while adding the category' };
+    }
+}
 
-    return newCategory;
-  } catch (error) {
-    console.error(error);
-    throw error; // Rethrow the error to handle it at the calling function
-  }
-};
+export const deleteCategoryService = async (categoryId: string) => {
+    try {
+        const deletedCategory = await prismaClient.category.delete({
+            where: {
+                id: categoryId,
+            },
+        });
+        return deletedCategory;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(`Failed to delete category. Error: ${error.message}.`);
+    }
+}
+
+
+

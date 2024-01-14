@@ -21,7 +21,7 @@ export interface IPosts {
   id: string;
   title: string;
   content: string;
-  category: ICategory;
+  categories: ICategory;
   author: IUser;
 
 }

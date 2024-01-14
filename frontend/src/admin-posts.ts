@@ -1,4 +1,4 @@
-// src/admin-posts.ts
+// frontend/src/admin-posts.ts
 
 import { IPosts } from './types';
 
@@ -58,6 +58,7 @@ function renderPosts(posts: IPosts[]) {
 
     posts.forEach(post => {
         const row = document.createElement('tr');
+        console.log('Post:', post);
         // Checkbox column
         const checkboxCell = document.createElement('td');
         checkboxCell.innerHTML = '<label><input type="checkbox" class="checkbox" /></label>';
@@ -72,7 +73,7 @@ function renderPosts(posts: IPosts[]) {
                          <p>${post.title}</p>
                      </div>
                      <div class="text-sm opacity-50">
-                         <p>${post.category}</p>
+                     <p>${post.categories ? post.categories.name : 'N/A'}</p>
                      </div>
                  </div>
              </div>
@@ -81,11 +82,11 @@ function renderPosts(posts: IPosts[]) {
 
         
         const categoryCell = document.createElement('td');
-        categoryCell.innerHTML = `<p>${post.category}</p>`;
+        categoryCell.innerHTML = `<p>${post.categories ? post.categories.name : 'N/A'}</p>`;
         row.appendChild(categoryCell);
 
         const authorCell = document.createElement('td');
-        authorCell.innerHTML = `<p>${post.author}</p>`;
+        authorCell.innerHTML = `<p>${post.author ? post.author.name : 'N/A'}</p>`;
         row.appendChild(authorCell);
 
         const contentCell = document.createElement('td');
