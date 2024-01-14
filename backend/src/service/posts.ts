@@ -38,3 +38,12 @@ export const getAllPostsService = async () => {
         }
 
 }
+
+// Example validation function
+export const isValidCategoryService = async (categoryId: string): Promise<boolean> => {
+    const category = await prismaClient.category.findUnique({
+        where: { id: categoryId },
+    });
+
+    return !!category; 
+};
