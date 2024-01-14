@@ -94,7 +94,6 @@ function renderCategories(categories: ICategory[]) {
     });
 
     renderPaginationControls(categories.length);
-    console.log(categories.length);
 }
 
 // Function to render pagination controls

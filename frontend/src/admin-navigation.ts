@@ -3,8 +3,9 @@
 
 import { fetchAndRenderUsers } from './admin-users';
 import { addCategories, fetchAndRenderCategories } from './admin-categories';
+import { addPosts,fetchAndRenderPosts } from './admin-posts';
 const menu = document.getElementById('menu-contents') as HTMLDivElement;
-    const categoriesButton = document.getElementById('admin-categories') as HTMLDivElement;
+    const postsButton = document.getElementById('admin-posts') as HTMLDivElement;
     const navLinks = document.querySelectorAll('.admin-list');
 
 export function setNavigation() {
@@ -26,6 +27,7 @@ export function setNavigation() {
                     .then(html => {
                         menu.innerHTML = html;
                         addCategories(); 
+                        addPosts();
                     })
                     .catch(error => {
                         console.warn(error);
@@ -35,6 +37,7 @@ export function setNavigation() {
             switch (id) {
                 case 'admin-posts':
                     fetchAndSetContent('/auth/admin-posts.html');
+                    fetchAndRenderPosts();
                     break;
                 case 'admin-categories':
                     fetchAndSetContent('/auth/admin-categories.html');
@@ -55,6 +58,6 @@ export function setNavigation() {
             }
         });
     });
-    categoriesButton.classList.add('bg-gray-950');
-    categoriesButton.click();
+    postsButton.classList.add('bg-gray-950');
+    postsButton.click();
 }

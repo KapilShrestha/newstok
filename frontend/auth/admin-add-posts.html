@@ -5,23 +5,23 @@
         <div class="w-6/12">
             <div class="mb-4 grid grid-cols-2 items-center">
                 <label for="title" class="">Title</label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                <input id="post-title-input" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
             </div>
             <div class="mb-4 grid grid-cols-2 items-center">
                 <label for="title" class="">Category</label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                <input id="post-category-input" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
             </div>
-            <div class="mb-4 grid grid-cols-2 items-center">
+            <!-- <div class="mb-4 grid grid-cols-2 items-center">
                 <label for="image" class="">Image</label>
                 <input type="file" name="image" id="image" placeholder="Image" class=" rounded border border-gray-700 w-full py-2 px-3 text-gray-300 focus:outline-none focus:border-gray-500" required>
-            </div>
+            </div> -->
         </div>
         <div class="mb-4 w-6/12">
             <label for="content" class="">Content</label>
-            <textarea name="content" id="content" cols="30" rows="10" placeholder="Content" class="rounded border border-gray-700 w-full py-2 px-3 focus:outline-none focus:border-gray-500" required></textarea>
+            <textarea id="post-content-input" name="content" id="content" cols="30" rows="10" placeholder="Content" class="rounded border border-gray-700 w-full py-2 px-3 focus:outline-none focus:border-gray-500" required></textarea>
         </div>     
         <div class="mb-4">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add post</button>
+            <button id="add-post-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add post</button>
         </div>
     </form>
 </div>
