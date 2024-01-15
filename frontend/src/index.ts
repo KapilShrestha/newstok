@@ -2,7 +2,7 @@
 const postCommentModal = document.getElementById("post-comment-modal") as HTMLDialogElement;
 
 import { fetchAndRenderCategories } from "./admin-categories";
-import { IPosts } from "./types";
+import { IComment, IPosts } from "./types";
 import { fetchAndRenderPosts } from "./admin-posts";
 
 
@@ -100,9 +100,6 @@ function createCard(post: IPosts, isFirst: boolean = false) {
         sharePost(post.title, post.content);
     });
 }
-
-
-
 function sharePost(title: string, content: string) {
     if (navigator.share) {
         navigator
@@ -164,3 +161,34 @@ export function addComments() {
 }
 
 addComments();
+
+
+export function fetchAndRenderComments() {
+    fetch('http://localhost:3000/comments')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Comments fetched successfully:', data.comments);
+                renderComments(data.comments);
+            } else {
+                console.error('Failed to fetch comments. Error:', data.error || 'Unknown error');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function renderComments(comments: IComment[]) {
+    const tbodyComments = document.getElementById('tbodyComments') as HTMLTableSectionElement;
+    tbodyComments.innerHTML = '';
+
+    comments.forEach(comment => {
+        const row = document.createElement('tr') as HTMLTableRowElement;
+        row.innerHTML = `
+            <td>${comment.content}</td>
+        `;
+        tbodyComments.appendChild(row);
+    });
+
+}

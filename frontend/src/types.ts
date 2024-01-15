@@ -19,11 +19,16 @@ export interface ICategory {
 
 export interface IPosts {
   createdAt: string | number | Date;
-  createdAt: any;
   id: string;
   title: string;
   content: string;
   categories: ICategory;
   author: IUser;
 
+}
+
+export interface IComment {
+  id: string;
+  content: string;
+  post: IPosts;
 }

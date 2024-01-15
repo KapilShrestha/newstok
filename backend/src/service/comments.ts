@@ -27,3 +27,16 @@ export const addCommentService = async ({postId, content}:IComment) => {
         throw error;
     }
 }
+
+export const getAllCommentsService = async () => {
+    try {
+        const comments = await prismaClient.comment.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+        return { data: comments };
+    } catch (error) {
+        return { error: 'An error occurred while adding the comment' };
+    }
+}
