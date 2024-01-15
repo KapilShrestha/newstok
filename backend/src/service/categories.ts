@@ -55,4 +55,20 @@ export const deleteCategoryService = async (categoryId: string) => {
 }
 
 
+export const updateCategoryService = async (id: string, { name }: ICategories) => {
+    try {
+        const updatedCategory = await prismaClient.category.update({
+            where: {
+                id,
+            },
+            data: {
+                name,
+            },
+        });
 
+        return updatedCategory;
+    } catch (error:any) {
+        console.error(error);
+        throw new Error(`Failed to update category. Error: ${error.message}.`);
+    }
+};

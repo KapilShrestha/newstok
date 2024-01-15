@@ -1,21 +1,21 @@
 //backend/src/controller/posts.ts
 
 import { Request, Response } from "express";
-import {addPostService } from '../service/posts';
-import { getAllPostsService } from '../service/posts';
-import { isValidCategoryService } from '../service/posts';
+import {addPostService, getAllPostsService, isValidCategoryService, deletePostService } from '../service/posts';
 import {CONTENT_LENGTH, TITLE_LENGTH} from '../constant/constants';
 
 export const addPost=async (req:Request, res:Response) => {
     try {
         const { title, category, content  } = req.body;
 
-        if (content.length > CONTENT_LENGTH ) {
-            return res.status(400).json({ error: 'Content exceeds the maximum limit of 25 characters.' });
-        }
         if (title.length > TITLE_LENGTH ) {
-            return res.status(400).json({ error: 'Content exceeds the maximum limit of 10 characters.' });
+            return res.status(400).json({ error: 'Content exceeds the maximum limit of 50 characters.' });
         }
+
+        if (content.length > CONTENT_LENGTH ) {
+            return res.status(400).json({ error: 'Content exceeds the maximum limit of 250 characters.' });
+        }
+        
 
         const isValidCategory = await isValidCategoryService(category);
         if (!isValidCategory) {
@@ -41,3 +41,15 @@ export const getAllPosts=async (req:Request, res:Response) => {
         res.status(500).send("Internal Server Error");
     }
 }
+
+export const deletePost=async (req:Request, res:Response) => {
+    try{
+        const { id } = req.params;
+        const deletedPost = await deletePostService(id);
+        res.status(200).json({ message: 'Post deleted successfully', data: deletedPost });
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+
+};

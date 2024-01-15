@@ -31,7 +31,11 @@ export const addPostService = async ({title, category, content}:IPost) => {
 export const getAllPostsService = async () => {
     try {
         const posts = await prismaClient.post.findMany({
-            include: {  categories: true }});
+            include: {  categories: true },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
           
             return posts;
         }
@@ -51,3 +55,19 @@ export const isValidCategoryService = async (categoryId: string): Promise<boolea
 
     return !!category; 
 };
+
+
+export const deletePostService = async (postId: string) => {
+    try {
+        const deletedPost = await prismaClient.post.delete({
+            where: {
+                id: postId,
+            },
+        });
+        return deletedPost;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(`Failed to delete post. Error: ${error.message}.`);
+    }
+
+}

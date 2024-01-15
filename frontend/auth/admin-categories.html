@@ -1,7 +1,7 @@
 <!-- frontend/auth/admin-categories.html -->
 <h1>admin categories</h1>
 <div class="flex justify-around items-center gap-7">
-    <button type="" class="btn btn-primary" onclick="addCategoriesModal.showModal()">Add Categories</button>
+    <button type="button" class="btn btn-primary" onclick="addCategoriesModal.showModal()">Add Categories</button>
 </div>
 
 <!-- Open the modal using add-categories-modal.showModal() method -->
@@ -15,6 +15,19 @@
             <button id="addCategoriesButton" class="btn btn-primary">Add</button>
         </div>
 
+    </div>
+</dialog>
+
+<!-- edit category modal -->
+<dialog id="editCategoriesModal" class="modal">
+    <div id="editAlertMessage" class="message"></div>
+    <div class="modal-box">
+        <p>Edit Category</p>
+        <div class="flex justify-around items-center">
+            <input id="editCategoriesInput" type="text" placeholder="Type here"
+                class="input input-bordered w-full max-w-xs" />
+            <button id="editCategoriesButton" class="btn btn-primary">Save Changes</button>
+        </div>
     </div>
 </dialog>
 

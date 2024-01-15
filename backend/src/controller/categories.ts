@@ -1,8 +1,7 @@
 // controller/categories.ts
 
 import { Request, Response } from "express";
-import { addCategoryService, getAllCategoriesService, deleteCategoryService } from '../service/categories';
-import {  } from '../service/categories';
+import { addCategoryService, getAllCategoriesService, deleteCategoryService, updateCategoryService } from '../service/categories';
 
 
 export const addCategory = async (req: Request, res: Response) => {
@@ -44,5 +43,23 @@ export const deleteCategory = async (req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+export const updateCategory = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { name } = req.body;
+
+        const updatedCategory = await updateCategoryService(id, { name });
+
+        if (!updatedCategory) {
+            return res.status(404).json({ message: "Category not found" });
+        }
+
+        res.status(200).json({ message: "Category updated successfully", data: updatedCategory });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };

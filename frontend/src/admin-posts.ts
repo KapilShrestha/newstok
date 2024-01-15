@@ -1,5 +1,6 @@
 // frontend/src/admin-posts.ts
 
+import { log } from 'console';
 import { IPosts } from './types';
 
 // function to add posts
@@ -93,14 +94,40 @@ function renderPosts(posts: IPosts[]) {
         contentCell.innerHTML = `<p class="line-clamp-2">${post.content}</p>`;
         row.appendChild(contentCell);
 
-        const actionsCell = document.createElement('th');
-        actionsCell.className = 'flex gap-4';
-        actionsCell.innerHTML = `
-             <button><i class="ri-delete-bin-6-line"></i></button>
-             <button><i class="ri-edit-2-line"></i></button>
+        const actionCell = document.createElement('th');
+        actionCell.className = 'flex gap-4';
+        actionCell.innerHTML = `
+             <button class="delete-post-button" data-post-id="${post.id}"><i class="ri-delete-bin-6-line"></i></button>
+             <button class="update-post-button" data-post-id="${post.id}"><i class="ri-edit-2-line"></i></button>
          `;
-        row.appendChild(actionsCell);
+        row.appendChild(actionCell);
+
+        const deleteButton = actionCell.querySelector('.delete-post-button') as HTMLButtonElement;
+        deleteButton.addEventListener('click', async () => {
+            const postId = deleteButton.dataset.postId;
+            console.log('Delete button clicked:', postId);
+            await deletePost(postId);
+        });
 
         tbodyPosts.appendChild(row);
     });
+}
+
+export async function deletePost(postId: string | undefined) {
+    if (!postId) return;
+
+    try {
+        const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log('Post deleted successfully');
+            fetchAndRenderPosts(); // Refresh the post list or perform other necessary actions
+        } else {
+            console.error('Failed to delete Post:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error deleting Post:', error);
+    }
 }

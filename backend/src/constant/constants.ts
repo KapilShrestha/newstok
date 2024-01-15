@@ -1,3 +1,3 @@
 // backend/constants/constants.ts
-export const TITLE_LENGTH = 10;
-export const CONTENT_LENGTH = 25;
+export const TITLE_LENGTH = 100;
+export const CONTENT_LENGTH = 250;

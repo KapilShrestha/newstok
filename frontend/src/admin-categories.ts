@@ -1,67 +1,16 @@
 //frontend/src/admin-categories.ts
 
+
 import { ICategory } from './types';
 let currentPage = 1;
 
 
-// to function to add categories
-export function addCategories() {
-    const addCategoriesButton = document.getElementById('addCategoriesButton') as HTMLButtonElement;
-    const addCategoriesModal = document.getElementById('addCategoriesModal') as HTMLDialogElement;
-   
-    addCategoriesButton?.addEventListener('click', () => {
-        console.log('addCategoriesButton clicked');
-        const categoryInput = document.getElementById('addCategoriesInput') as HTMLInputElement;
-        const categoryName = categoryInput.value;
-
-        // Log the request payload before making the fetch call
-        console.log('Request Payload:', JSON.stringify({ name: categoryName }));
-
-        fetch('http://localhost:3000/categories/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name: categoryName }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log('Category added successfully:', data.category);
-                    showMessage(data.message, 'success');
-                    addCategoriesModal.close();
-
-                    location.reload();
-                } else {
-                    console.error('Failed to add category. Error:', data.error || 'Unknown error');
-                    // Display error message
-                    showMessage(data.message, 'error');
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    });
-}
-
-// Add the showMessage function with explicit types
-function showMessage(message: string, type: 'success' | 'error') {
-    const alertMessage = document.getElementById('alert-message') as HTMLDivElement;
-    
-    alertMessage.textContent = message;
-    alertMessage.classList.remove('success', 'error');
-    alertMessage.classList.add(type, 'visible');
-    setTimeout(() => {
-        alertMessage.classList.remove('visible');
-    }, 5000); // Hide the message after 5 seconds (adjust as needed)
-}
-
 
 // function to fetch and render Categories from the database
-export function fetchAndRenderCategories() {
+export function fetchAndRenderCategories()  {
     fetch('http://localhost:3000/categories')
         .then(response => response.json())
-        .then((data: {data: ICategory[]}) => {
+        .then((data: { data: ICategory[] }) => {
             renderCategories(data.data);
             // console.log(data);
         })
@@ -107,17 +56,111 @@ function renderCategories(categories: ICategory[]) {
         <div class="flex gap-4">
           <div>
             <div class="font-bold">
-                <button><i class="ri-delete-bin-6-line"></i></button>
-                <button><i class="ri-edit-2-line"></i></button>
+                <button class="delete-category-button" data-category-id="${category.id}"><i class="ri-delete-bin-6-line"></i></button>
+                <button class="update-category-button" data-category-id="${category.id}"><i class="ri-edit-2-line"></i></button>
+
             </div>
           </div>
         `;
         row.appendChild(actionCell);
+
+        const deleteButton = actionCell.querySelector('.delete-category-button') as HTMLButtonElement;
+        deleteButton.addEventListener('click', async () => {
+            const categoryId = deleteButton.dataset.categoryId;
+            await deleteCategory(categoryId);
+        });
+
+        const updateButton = actionCell.querySelector('.update-category-button') as HTMLButtonElement;
+        updateButton.addEventListener('click', () => {
+            const categoryId = updateButton.dataset.categoryId;
+            console.log('Button clicked:', categoryId);
+        });
+
         tbodyCategories.appendChild(row);
     });
 
     renderPaginationControls(categories.length);
 }
+
+
+
+
+
+// to function to add categories
+export function addCategories() {
+    const addCategoriesButton = document.getElementById('addCategoriesButton') as HTMLButtonElement;
+    const addCategoriesModal = document.getElementById('addCategoriesModal') as HTMLDialogElement;
+
+    addCategoriesButton?.addEventListener('click', () => {
+        console.log('addCategoriesButton clicked');
+        const categoryInput = document.getElementById('addCategoriesInput') as HTMLInputElement;
+        const categoryName = categoryInput.value;
+
+        // Log the request payload before making the fetch call
+        console.log('Request Payload:', JSON.stringify({ name: categoryName }));
+
+        fetch('http://localhost:3000/categories/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: categoryName }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Category added successfully:', data.category);
+                    showMessage(data.message, 'success');
+                    addCategoriesModal.close();
+
+                    location.reload();
+                } else {
+                    console.error('Failed to add category. Error:', data.error || 'Unknown error');
+                    // Display error message
+                    showMessage(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+}
+
+// Add the showMessage function with explicit types
+function showMessage(message: string, type: 'success' | 'error') {
+    const alertMessage = document.getElementById('alert-message') as HTMLDivElement;
+
+    alertMessage.textContent = message;
+    alertMessage.classList.remove('success', 'error');
+    alertMessage.classList.add(type, 'visible');
+    setTimeout(() => {
+        alertMessage.classList.remove('visible');
+    }, 5000); // Hide the message after 5 seconds (adjust as needed)
+}
+
+
+
+// Function to delete a category
+async function deleteCategory(categoryId: string | undefined) {
+    if (!categoryId) return;
+
+    try {
+        const response = await fetch(`http://localhost:3000/categories/${categoryId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log('Category deleted successfully');
+            fetchAndRenderCategories(); // Refresh the category list or perform other necessary actions
+        } else {
+            console.error('Failed to delete category:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error deleting category:', error);
+    }
+}
+
+
 
 // Function to render pagination controls
 function renderPaginationControls(totalItems: number) {
@@ -167,5 +210,4 @@ function renderPaginationControls(totalItems: number) {
     paginationControlsContainer.appendChild(paginationContainer);
 }
 
-// Call the initial render with the first page
-fetchAndRenderCategories();
+
