@@ -42,18 +42,18 @@ function createCard(post: IPosts) {
         <div class="flex flex-col items-center text-md md:text-xl lg:text-xl ">
             <div class="bg-blue-300 shadow-md rounded-md m-2 w-[90vw] h-[60vh] md:w-[60vw] md:h-[40vh] lg:w-[40vw] lg:h-[80vh] xl:w-[30vw] xl:h-[90vh] flex flex-col">
                 <div class="top-0 flex justify-around">
-                    <div>
+                    <div class="mt-6 shadow-md p-2 rounded-lg text-white">
                         <p>${post.categories ? post.categories.name : "N/A"}</p>
                     </div>
                 </div>
                 <div class="flex-grow flex flex-col mx-8">
                     <div class="mt-6">
-                        <p class="text-lg md:text-xl lg:text-xl">${post.title}</p>
+                        <p class="font-bold text-lg md:text-xl lg:text-xl text-gray-800 ">${post.title}</p>
                         <hr class="bg-gray-300 ">
                     </div>
                     <div class="grid grid-cols-12">
                         <div class="col-span-12">
-                            <p class="text-sm md:text-xl lg:text-xl mt-6">${post.content}</p>
+                            <p class="text-sm md:text-xl lg:text-xl mt-6 text-gray-800">${post.content}</p>
                         </div>
                     </div>
                     <div class="flex mt-auto items-center justify-between class="text-sm md:text-xl lg:text-xl mt-6"">

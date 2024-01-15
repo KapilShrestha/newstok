@@ -21,13 +21,16 @@
             </div>
             <div>
                 <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="email"
-                    name="" id="login-email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Invalid email">
+                    name="" id="login-email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Invalid email" requierd>
                     <div id="email-error" style="color: red;"></div>
 
             </div>
-            <div>
-                <input class="w-[70%] mb-2 p-1 rounded-sm border-2 border-slate-300" type="password" name="" id="login-password"
-                    placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            <div class="relative">
+                <input class="w-[70%] mb-2 p-1 rounded-sm border-2 border-slate-300 passwordInput" type="password" name="" id="login-password"
+                    placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" requierd>
+                <span id="toggle-password" class="absolute inset-y-0 right-12 flex items-center pr-3 cursor-pointer">
+                    <i class="ri-eye-off-line"></i>
+                </span>
             </div>
             <button type="submit" class="w-[70%] btn btn-primary" id="login-button">Log In</button>
             

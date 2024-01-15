@@ -27,20 +27,26 @@
             <p class="mb-2">of your choice</p>
 
             <div>
-                <input class="w-[70%]  p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="text"
-                    name="" id="signup-email" placeholder="Email">
+                <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="email"
+                    name="" id="signup-email" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?" title="Invalid email" requierd>
+                    <div id="email-error" style="color: red;"></div>
+
             </div>
             <div>
                 <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="text"
-                    name="" id="signup-name" placeholder="name">
+                    name="" id="signup-name" placeholder="name" required>
             </div>
             <div>
                 <input class="w-[70%]  p-1 rounded-sm border-2 border-slate-300 focus:border-slate-700" type="text"
-                    name="" id="signup-username" placeholder="username">
+                    name="" id="signup-username" placeholder="username" required>
             </div>
-            <div>
-                <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300" type="text" name="" id="signup-password"
-                    placeholder="Password">
+            <div class="relative">
+                <input class="w-[70%] my-2 p-1 rounded-sm border-2 border-slate-300 password" type="text" name="" id="signup-password"
+                    placeholder="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" requierd>
+                    <span id="toggle-password" class="absolute inset-y-0 right-12 flex items-center pr-3 cursor-pointer" >
+                        <i class="ri-eye-off-line"></i>
+                    </span>
+                    <div id="email-error" style="color: red;"></div>
             </div>
             <p class="mx-4">By signing up, you agree to our Terms , Privacy </p>
             <p class="mb-2">Policy and Cookies Policy .</p>

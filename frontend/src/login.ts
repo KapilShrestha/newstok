@@ -1,8 +1,9 @@
 // frontend/src/login.ts
 
+import { togglePasswordVisibility } from "./utils";
+
 const loginEmail = document.getElementById('login-email') as HTMLInputElement;
 const loginPassword = document.getElementById('login-password') as HTMLInputElement;
-const loginButton = document.getElementById('login-button') as HTMLButtonElement;
 const loginForm = document.getElementById('login-form') as HTMLFormElement;
 
 
@@ -41,4 +42,12 @@ loginForm?.addEventListener('submit', (event) => {
         });
 
 });
+
+
+document.getElementById('toggle-password')?.addEventListener('click', function() {
+    togglePasswordVisibility('login-password', 'toggle-password');
+});
+
+
+
 

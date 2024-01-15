@@ -1,6 +1,7 @@
+import { togglePasswordVisibility } from "./utils";
+
 const signupEmail = document.getElementById('signup-email') as HTMLInputElement;
 const signupPassword = document.getElementById('signup-password') as HTMLInputElement;
-const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
 const signupName = document.getElementById('signup-name') as HTMLInputElement;
 const signupForm = document.getElementById('signup-form') as HTMLFormElement;
 
@@ -30,4 +31,8 @@ signupForm.addEventListener('submit', (event) => {
         .catch(error => {
             console.warn(error);
         });
+});
+
+document.getElementById('toggle-password')?.addEventListener('click', function() {
+    togglePasswordVisibility('signup-password', 'toggle-password');
 });
