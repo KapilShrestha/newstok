@@ -4,6 +4,7 @@
 import { fetchAndRenderUsers } from './admin-users';
 import { addCategories, fetchAndRenderCategories } from './admin-categories';
 import { addPosts,fetchAndPopulateCategories,fetchAndRenderPosts, populateCategoryDropdown } from './admin-posts';
+import { fetchAndRenderComments } from './admin-comments';
 const menu = document.getElementById('menu-contents') as HTMLDivElement;
     const postsButton = document.getElementById('admin-posts') as HTMLDivElement;
     const navLinks = document.querySelectorAll('.admin-list');
@@ -45,9 +46,9 @@ export function setNavigation() {
                     break;
                 case 'admin-comments':
                     fetchAndSetContent('/auth/admin-comments.html');
+                    fetchAndRenderComments();
                     break;
                 case 'admin-add-posts':
-                    
                     fetchAndSetContent('/auth/admin-add-posts.html');
                     populateCategoryDropdown();
                     fetchAndPopulateCategories();

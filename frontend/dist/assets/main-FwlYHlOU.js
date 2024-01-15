@@ -1,1 +1,0 @@
-import"./main-ClrnbhyS.js";import"./login-9arz2Xpc.js";const o=document.getElementById("logout-button");o.addEventListener("click",t=>{t.preventDefault(),localStorage.removeItem("accessToken"),window.location.href="/auth/login.html"});

@@ -2,7 +2,7 @@
 const postCommentModal = document.getElementById("post-comment-modal") as HTMLDialogElement;
 
 import { fetchAndRenderCategories } from "./admin-categories";
-import { IComment, IPosts } from "./types";
+import { IPosts } from "./types";
 import { fetchAndRenderPosts } from "./admin-posts";
 
 
@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("http://localhost:3000/posts")
         .then((response) => response.json())
         .then((data: IPosts[]) => {
-            data.forEach((post, index) => {
-                createCard(post, index === 0); // Pass true for the first card
+            data.forEach((post) => {
+                createCard(post); // Pass true for the first card
             });
         })
         .catch((error) => {
@@ -34,7 +34,7 @@ function showMessage(message: string, type: 'success' | 'error') {
     }, 5000); // Hide the message after 5 seconds (adjust as needed)
 }
 
-function createCard(post: IPosts, isFirst: boolean = false) {
+function createCard(post: IPosts) {
     // Your HTML structure as a string with dynamic data
     const cardHTML = `
         <div class="flex flex-col items-center text-md md:text-xl lg:text-xl ">
@@ -60,7 +60,7 @@ function createCard(post: IPosts, isFirst: boolean = false) {
                         </div>
                         <div class="flex flex-1 justify-center gap-4 my-4  text-red-700 ">
                             <button id="post-like-button" class="unlike like:bg-red-700"><i class="ri-heart-3-line text-3xl"></i></button>
-                            <button id="post-comment-button" class="" onclick =handleCommentButtonClick('${post.id}')><i class="ri-discuss-line text-3xl "></i></button>
+                            <button id="post-comment-button" onclick =('${post.id}')><i class="ri-discuss-line text-3xl "></i></button>
                             <button id="post-share-button" class="" onclick="sharePost('${post.title}', '${post.content}')"><i class="ri-share-forward-line text-3xl  "></i></button>
                         </div>
                         <div class="flex-1 text-xs flex justify-end">
@@ -89,10 +89,12 @@ function createCard(post: IPosts, isFirst: boolean = false) {
     });
 
     // Get the post-comment-button after it's added to the DOM
-    const addCommentButton = document.getElementById("post-comment-button") as HTMLButtonElement;
-    addCommentButton.addEventListener("click", () => {
-        console.log("clicked");
-        handleCommentButtonClick(post.id);
+    const addCommentButton = cardDiv.querySelectorAll("#post-comment-button") as NodeListOf<HTMLButtonElement>;
+    addCommentButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            console.log("clicked");
+            handleCommentButtonClick(post.id);
+        });
     });
 
     const postShareButton = cardDiv.querySelector("#post-share-button") as HTMLButtonElement;
@@ -163,32 +165,41 @@ export function addComments() {
 addComments();
 
 
-export function fetchAndRenderComments() {
-    fetch('http://localhost:3000/comments')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                console.log('Comments fetched successfully:', data.comments);
-                renderComments(data.comments);
-            } else {
-                console.error('Failed to fetch comments. Error:', data.error || 'Unknown error');
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
-}
+// export function fetchAndRenderComments() {
+//     console.log('Fetching comments...');
 
-function renderComments(comments: IComment[]) {
-    const tbodyComments = document.getElementById('tbodyComments') as HTMLTableSectionElement;
-    tbodyComments.innerHTML = '';
+//     fetch('http://localhost:3000/comments')
+//         .then(response => {
+//             console.log('Response status:', response.status);
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             if (data) {
+//                 console.log('Comments fetched successfully:', data);
+//                 renderComments(data.data);
+//             } else {
+//                 console.error('Failed to fetch comments. Server response:', data);
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error fetching comments:', error);
+//         });
+// }
 
-    comments.forEach(comment => {
-        const row = document.createElement('tr') as HTMLTableRowElement;
-        row.innerHTML = `
-            <td>${comment.content}</td>
-        `;
-        tbodyComments.appendChild(row);
-    });
 
-}
+// function renderComments(comments: IComment[]) {
+//     console.log('Rendering comments:', comments);
+//     const commentContainer = document.getElementById('commentContainer') as HTMLDivElement;
+
+//     comments.forEach(comment => {
+//         const commentDiv = document.createElement('div');
+//         commentDiv.textContent = comment.content;
+//         commentContainer.appendChild(commentDiv);
+//     });
+
+// }
+
+// fetchAndRenderComments();
