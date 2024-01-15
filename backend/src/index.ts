@@ -14,6 +14,6 @@ app.use(logger);
 
 app.use(routes)
 
-console.log(`Server listening on port:${config.serverPort}`);
+
 
 app.listen(config.serverPort);

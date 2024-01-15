@@ -14,7 +14,6 @@ export const getAllUser = async () => {
     
     });
     
-    // console.log(user, "match check");
     return updatedUser;
     
 

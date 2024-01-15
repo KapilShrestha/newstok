@@ -33,7 +33,6 @@ export const addPost=async (req:Request, res:Response) => {
 export const getAllPosts=async (req:Request, res:Response) => {
     try {
         const data = await getAllPostsService();
-        console.log('Posts:', data); // Log the fetched data
         return res.status(200).json(data);
     
     } catch (error) {

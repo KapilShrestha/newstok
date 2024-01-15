@@ -14,7 +14,6 @@ const SALT_ROUNDS = 10;
 
 export const signup = async (body: ISignUp) => {
     bcrypt.hash(body.password, SALT_ROUNDS, async (err, hash) => {
-        console.log({ hash });
         const user = {
             name: body.name,
             email: body.email,
@@ -35,7 +34,6 @@ export const login = async (body: ISignUp) => {
         }
     });
     
-    console.log(user, "match check");
     try {
         const passwordMatch = await bcrypt.compare(body.password, user?.password??'');
         if (!passwordMatch) {
@@ -47,13 +45,11 @@ export const login = async (body: ISignUp) => {
         const refreshToken = jwt.sign(user??{}, config.jwt.refreshTokenSecret!, {
             expiresIn: REFRESH_TOKEN_EXPIRY,
         });
-        console.log({ accessToken, refreshToken });
         return { 
             accessToken, 
             refreshToken 
         };
     } catch (error: any) {
-        console.log(error.message);
         return { error: error.message };
     }
 }

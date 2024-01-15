@@ -27,7 +27,6 @@ export const addCategory = async (req: Request, res: Response) => {
 export const getAllCategories = async (req: Request, res: Response) => {
     try {
         const data = await getAllCategoriesService();
-        console.log('Categories:', data); // Log the fetched data
         return res.status(200).json(data);
     } catch (error) {
         console.error(error);

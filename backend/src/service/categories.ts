@@ -77,7 +77,6 @@ export const checkforExistingCategoryService = async (name: string) => {
                 
             }
         });
-        console.log(existingCategory, "some check message");
         
         if (existingCategory.length > 0) {
             return true;

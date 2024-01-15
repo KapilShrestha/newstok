@@ -1,4 +1,3 @@
-console.log("signup")
 const signupEmail = document.getElementById('signup-email') as HTMLInputElement;
 const signupPassword = document.getElementById('signup-password') as HTMLInputElement;
 const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
@@ -11,7 +10,6 @@ signupForm.addEventListener('submit', (event) => {
     const password = signupPassword.value;
     const name = signupName.value;
     const body = JSON.stringify({ email, password, name });
-    console.log(body);
     fetch('http://localhost:3000/auth/signup', {
         method: 'POST',
         headers: {

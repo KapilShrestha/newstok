@@ -21,7 +21,6 @@ export const addComment=async (req:Request, res:Response) => {
 export const getAllComments = async (req: Request, res: Response) => {
     try {
         const data = await getAllCommentsService();
-        console.log('Comments:', data); // Log the fetched data
         return res.status(200).json(data);
     } catch (error) {
         console.error(error);
@@ -33,7 +32,6 @@ export const getCommentsByPostId = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const data = await getCommentsByPostIdService( id);
-        console.log('Comments:', data); // Log the fetched data
         return res.status(200).json(data);
     } catch (error) {
         console.error(error);
