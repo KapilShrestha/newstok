@@ -3,7 +3,9 @@
 import { setNavigation } from './admin-navigation';
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
+    
     setNavigation();
     
 });

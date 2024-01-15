@@ -1,5 +1,4 @@
-
-
+// frontend/src/main.ts
 const accessToken = localStorage.getItem('accessToken') || null;
 
 if (accessToken) {

@@ -5,14 +5,26 @@ import { ICategory } from './types';
 let currentPage = 1;
 
 
-
 // function to fetch and render Categories from the database
-export function fetchAndRenderCategories()  {
+export function fetchAndRenderCategories() {
     fetch('http://localhost:3000/categories')
-        .then(response => response.json())
-        .then((data: { data: ICategory[] }) => {
-            renderCategories(data.data);
-            // console.log(data);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json() as Promise<{ data: ICategory[] }>;
+        })
+        .then(({ data }) => {
+            if (Array.isArray(data)) {
+                // 'data' is now guaranteed to be an array of ICategory
+                const categoryNames = data.map((category: ICategory) => category.name);
+                console.log('Category Names:', categoryNames);
+
+                // Continue with rendering or other logic
+                renderCategories(data);
+            } else {
+                console.log('Unexpected data format:', data);
+            }
         })
         .catch(error => {
             console.error('Failed to fetch Categories:', error);
@@ -210,4 +222,5 @@ function renderPaginationControls(totalItems: number) {
     paginationControlsContainer.appendChild(paginationContainer);
 }
 
-
+// Call the initial render with the first page
+fetchAndRenderCategories();

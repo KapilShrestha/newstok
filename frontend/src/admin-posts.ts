@@ -1,20 +1,95 @@
 // frontend/src/admin-posts.ts
 
-import { log } from 'console';
+import { appState } from './state';
 import { IPosts } from './types';
+
+
+ // Function to dynamically populate the category dropdown using appState
+ export function populateCategoryDropdown() {
+    const categorySelect = document.getElementById('post-category-select') as HTMLSelectElement;
+
+    // Check if categorySelect is not null
+    if (categorySelect) {
+        // Clear existing options
+        categorySelect.innerHTML = '';
+
+        // Add default option
+        const defaultOption = document.createElement('option') as HTMLOptionElement;
+        defaultOption.text = 'Select Category';
+        defaultOption.value = '';
+        categorySelect.add(defaultOption);
+
+        // Add categories from appState
+        appState.categories.forEach(category => {
+            const option = document.createElement('option');
+            option.text = category;
+            option.value = category;
+            categorySelect.add(option);
+        });
+    }
+}
+
+// Call the function to populate the category dropdown
+populateCategoryDropdown();
+
+// Function to fetch and update categories dynamically
+export function fetchAndPopulateCategories() {
+    fetch('http://localhost:3000/categories')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(({ data }) => {
+            console.log('tot teeseres:', data);
+            if (Array.isArray(data)) {
+                // 'data' is now guaranteed to be an array of category objects
+                const categorySelect = document.getElementById('post-category-select') as HTMLSelectElement;
+
+                // Clear existing options
+                categorySelect.innerHTML = '';
+
+                // Add default option
+                const defaultOption = document.createElement('option') as HTMLOptionElement;
+                defaultOption.text = 'Select Category';
+                defaultOption.value = '';
+                categorySelect.add(defaultOption);
+
+                // Add categories from the fetched data
+                data.forEach(category => {
+                    console.log('category now checking:', category);
+                    
+                    const option = document.createElement('option');
+                    option.text = category.name;
+                    option.value = category.id;
+                    categorySelect.add(option);
+                });
+            } else {
+                console.log('Unexpected data format:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Failed to fetch Categories:', error);
+        });
+}
+
+// Call the function to fetch and populate categories dynamically
+// fetchAndPopulateCategories();
+
 
 // function to add posts
 export function addPosts(){
     const addPostButton = document.getElementById('add-post-button') as HTMLButtonElement;
-    // console.log(addPostButton);
+    
     addPostButton?.addEventListener('click', (e)=>{
         e.preventDefault();
 
         console.log('addPostButton clicked');
         const postTitleInput = document.getElementById('post-title-input') as HTMLInputElement;
         const postTitle = postTitleInput.value;
-        const postCategoryInput = document.getElementById('post-category-input') as HTMLInputElement;
-        const postCategory = postCategoryInput.value;
+        const postCategorySelect = document.getElementById('post-category-select') as HTMLSelectElement;
+        const postCategory = postCategorySelect.value;
         const postContentInput = document.getElementById('post-content-input') as HTMLInputElement; 
         const postContent = postContentInput.value;
 
@@ -41,7 +116,6 @@ export function fetchAndRenderPosts() {
     fetch('http://localhost:3000/posts')
         .then(response => response.json())
         .then((data: IPosts[]) => {
-            console.log(data);
             renderPosts(data);
         })
         .catch(error => {
@@ -59,7 +133,6 @@ function renderPosts(posts: IPosts[]) {
 
     posts.forEach(post => {
         const row = document.createElement('tr');
-        console.log('Post:', post);
         // Checkbox column
         const checkboxCell = document.createElement('td');
         checkboxCell.innerHTML = '<label><input type="checkbox" class="checkbox" /></label>';
@@ -131,3 +204,5 @@ export async function deletePost(postId: string | undefined) {
         console.error('Error deleting Post:', error);
     }
 }
+
+

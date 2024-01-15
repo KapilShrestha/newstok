@@ -1,3 +1,4 @@
+// frontend/src/navbar.ts
 document.addEventListener("DOMContentLoaded", () => {
   const profileButton = document.getElementById('user-menu-button');
   const profileDropdown = document.getElementById('profile-dropdown');

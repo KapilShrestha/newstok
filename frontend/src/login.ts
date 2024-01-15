@@ -1,3 +1,4 @@
+// frontend/src/login.ts
 console.log("login")
 
 const loginEmail = document.getElementById('login-email') as HTMLInputElement;

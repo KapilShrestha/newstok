@@ -1,3 +1,4 @@
+<!-- newstok/frontend/index.html-->
 <!doctype html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
 </head>
 
 <body>
-  <div class="navbar bg-base-100">
+  <div class="navbar fixed bg-base-100  w-full top-0 left-0 z-[50]">
     <div class="flex-1">
       <a class="btn btn-ghost text-xl">Newstok</a>
     </div>
@@ -40,79 +41,33 @@
       </div>
     </div>
   </div>
+  <div id="cardContainer" class="pt-20">
+    <!-- card is added dynamically from database -->
+  </div>
 
-
-  <div class="flex flex-col items-center text-md md:text-xl lg:text-2xl">
-    <div
-        class="bg-blue-300 shadow-md rounded-md m-2 w-[90vw] h-[50vh] md:w-[80vw] md:h-[60vh] lg:w-[50vw] lg:h-[80vh] xl:w[40vw] flex flex-col">
-        <div class="top-0 flex justify-around">
-            <div>
-                <p>Economics</p>
-            </div>
+  <dialog id="post-comment-modal" class="modal" >
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="flex justify-center"><h3 class="font-bold text-lg">Comments</h3></div>
+      <div class="flex justify-around">
+        <div>
+          <textarea class="input input-bordered input-primary w-full max-w-xs" type="text" name="" id="commentInput" placeholder="Write your comments here"> </textarea>
         </div>
-        <div class="flex-grow flex flex-col mx-8">
-            <div class="mt-8">
-                <p>Title</p>
-                <hr class="bg-gray-300 ">
-            </div>
-
-            <div class="grid grid-cols-12 ">
-                <div class="col-span-11 ">
-                    <p class="mt-8">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, dolorem
-                        placeat! Labore fugit fugiat
-                        magnam repellat officia aliquid corporis iste optio vitae, maxime corrupti deserunt laborum
-                        harum enim
-                        excepturi omnis.
-                    </p>
-                </div>
-                <div class="flex flex-col gap-2 justify-center ">
-                    <i class="ri-heart-3-line text-3xl text-red-700 "></i>
-                    <i class="ri-discuss-line text-3xl text-red-700 "></i>
-                    <i class="ri-share-forward-line text-3xl text-red-700 "></i>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-            <div class="flex mt-auto justify-between">
-                <div class="flex flex-col">
-                    <div>
-                        <p>PostedBy:</p>
-                    </div>
-                    <div>
-                        <p>Author</p>
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <div>
-                        <p>PostedDate:</p>
-                    </div>
-                    <div>
-                        <p>Date Date</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <button id="addCommentButton" >
+          <i class="ri-arrow-up-line"></i>
+        </button>
+      </div>
     </div>
-</div>
+  </dialog>
+
+  
 
 
 
 
-
-
-
-
-
-
-
-
+  <script type="module" src="./src/index.ts"></script>
   <script type="module" src="./src/login.ts"></script>
   <script type="module" src="./src/logout.ts"></script>
 </body>

@@ -1,4 +1,5 @@
 // // import path from 'path';
+// Used for testing but not used in this project for now
 // import UniversalRouter from 'universal-router';
 
 // const routes = [

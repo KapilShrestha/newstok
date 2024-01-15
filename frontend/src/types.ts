@@ -18,6 +18,8 @@ export interface ICategory {
 
 
 export interface IPosts {
+  createdAt: string | number | Date;
+  createdAt: any;
   id: string;
   title: string;
   content: string;

@@ -1,13 +1,13 @@
 // controller/categories.ts
 
 import { Request, Response } from "express";
-import { addCategoryService, getAllCategoriesService, deleteCategoryService, updateCategoryService } from '../service/categories';
+import { addCategoryService, getAllCategoriesService, deleteCategoryService, updateCategoryService, checkforExistingCategoryService } from '../service/categories';
 
 
 export const addCategory = async (req: Request, res: Response) => {
     try {
         const { name } = req.body;
-        const existingCategory = await addCategoryService({ name });
+        const existingCategory = await checkforExistingCategoryService(name);
 
         if (existingCategory) {
             return res.status(400).json({ message: "Category already exists" });

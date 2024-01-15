@@ -32,8 +32,22 @@ model Post {
   // authorId   String
   categories Category @relation(fields: [categoryId], references: [id])
   categoryId String
-  // photo     Photo?  
+  // photo     Photo? 
+  comments   Comment[] 
+
   
+}
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  post     Post @relation(fields: [postId], references: [id])
+  postId    String   
+  // author    User?     @relation(fields: [authorId], references: [id])
+  // authorId  String
+  // post      Post     @relation(fields: [postId], references: [id])
+  // postId    String
 }
 
 model Category {

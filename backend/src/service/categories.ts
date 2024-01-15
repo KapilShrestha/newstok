@@ -6,15 +6,7 @@ import { ICategories } from '../interface/categories';
 
 export const addCategoryService = async ({name}:ICategories) => {
     try {
-        const lowercaseName = name.toLowerCase(); // Convert to lowercase
-        const existingCategory = await prismaClient.category.findUnique({
-            where: {
-                name: lowercaseName,
-            }
-        });
-        if (existingCategory) {
-            throw new Error("Category already exists");
-        }
+        
         const newCategory = await prismaClient.category.create({
             data: {
                 name,
@@ -72,3 +64,27 @@ export const updateCategoryService = async (id: string, { name }: ICategories) =
         throw new Error(`Failed to update category. Error: ${error.message}.`);
     }
 };
+
+export const checkforExistingCategoryService = async (name: string) => {
+    try {
+        const existingCategory = await prismaClient.category.findMany({
+
+            where: {
+                name :{
+                    equals: name,
+                    mode: 'insensitive',
+                }
+                
+            }
+        });
+        console.log(existingCategory, "some check message");
+        
+        if (existingCategory.length > 0) {
+            return true;
+        }
+        return false;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(`Failed to add category. Error: ${error.message}.`);
+    }
+}

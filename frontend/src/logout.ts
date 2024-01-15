@@ -1,3 +1,4 @@
+// frontend/src/logout.ts
 const logoutButton = document.getElementById('logout-button') as HTMLElement;
 
 logoutButton.addEventListener('click', (event) => {
