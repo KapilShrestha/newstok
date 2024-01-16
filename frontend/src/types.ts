@@ -3,6 +3,7 @@ export interface IUser {
   email: string;
   role: "ADMIN" | "AUTHOR" | "BASIC";
   name: string | null;
+  username: string;
   isAdmin: boolean;
   isAuthor: boolean;
   // role:  "ADMIN"|"AUTHOR"|"BASIC";

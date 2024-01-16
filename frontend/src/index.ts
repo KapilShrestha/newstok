@@ -60,10 +60,10 @@ function createCard(post: IPosts) {
                         <div class="flex-1 text-xs flex justify-start">
                             <p>${post.author ? post.author.name : "N/A"}</p>
                         </div>
-                        <div class="flex flex-1 justify-center gap-4 my-4  text-red-700 ">
-                            <button id="post-like-button" class="unlike like:bg-red-700"><i class="ri-heart-3-line text-3xl"></i></button>
-                            <button class="post-comment-button" id="post-comment-button-${post.id}" ><i id="${post.id}" class="ri-discuss-line text-3xl "></i></button>
-                            <button id="post-share-button" class="" onclick="sharePost('${post.title}', '${post.content}')"><i class="ri-share-forward-line text-3xl  "></i></button>
+                        <div class="flex flex-1 justify-center gap-4 my-4  text-red-700">
+                            <button id="post-like-button" class="unlike like:bg-red-700 p-1 hover:text-blue-900 "><i class="ri-heart-3-line text-3xl"></i></button>
+                            <button class="post-comment-button p-1 hover:text-blue-900 " id="post-comment-button-${post.id}" ><i id="${post.id}" class="ri-discuss-line text-3xl "></i></button>
+                            <button id="post-share-button" class="p-1 hover:text-blue-900 " onclick="sharePost('${post.title}', '${post.content}')"><i class="ri-share-forward-line text-3xl  "></i></button>
                         </div>
                         <div class="flex-1 text-xs flex justify-end">
                             <p>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "N/A"}</p>
@@ -75,7 +75,7 @@ function createCard(post: IPosts) {
     `;
 
 
-    
+
 
     // Create the card div
     const cardDiv = document.createElement("div") as HTMLDivElement;
@@ -97,7 +97,7 @@ function createCard(post: IPosts) {
     const addCommentButton = cardDiv.querySelectorAll(".post-comment-button") as NodeListOf<HTMLButtonElement>;
     addCommentButton.forEach((button) => {
         button.addEventListener("click", (e: any) => {
-            console.log("clicked 123456",e.target.id);
+            console.log("clicked 123456", e.target.id);
             handleCommentButtonClick(e.target.id);
         });
     });
@@ -126,17 +126,20 @@ function handleCommentButtonClick(postId: string) {
     console.log("clicked");
     postCommentModal.showModal();
     fetchAndRenderComments(postId);
+    
     selectedPostId = postId;
 }
 
 export function addComments() {
     const postCommentButton = document.getElementById("addCommentButton") as HTMLButtonElement;
-   
+
 
     postCommentButton?.addEventListener('click', () => {
         console.log('addCategoriesButton clicked');
         const commentInput = document.getElementById('commentInput') as HTMLInputElement;
         const comment = commentInput.value;
+        const isValidComment = submitCommentForm();
+        if (!isValidComment) return;
 
         // Log the request payload before making the fetch call
         console.log('Request Payload:', JSON.stringify({ content: comment }));
@@ -172,39 +175,62 @@ addComments();
 
 export function fetchAndRenderComments(postId: string) {
     console.log('Fetching comments...');
-  
+
     fetch(`http://localhost:3000/comments/${postId}`)
-      .then(response => {
-        console.log('Response status:', response.status);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data) {
-          console.log('Comments fetched successfully:', data);
-          renderComments(data.data);
-        } else {
-          console.error('Failed to fetch comments. Server response:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching comments:', error);
-      });
-  }
-  
-  function renderComments(comments: IComment[]) {
+        .then(response => {
+            console.log('Response status:', response.status);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data) {
+                console.log('Comments fetched successfully:', data);
+                renderComments(data.data);
+            } else {
+                console.error('Failed to fetch comments. Server response:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error);
+        });
+}
+
+function renderComments(comments: IComment[]) {
     console.log('Rendering comments:', comments);
     const commentContainer = document.getElementById('commentContainer') as HTMLDivElement;
 
     commentContainer.innerHTML = '';
-  
+
     comments.forEach(comment => {
-      const commentDiv = document.createElement('div');
-      commentDiv.textContent = comment.content;
-      commentContainer.appendChild(commentDiv);
+        const commentDiv = document.createElement('div');
+        commentDiv.innerHTML = `
+      <div class="flex items-center gap-3 ml-3 mt-2 shadow-md rounded-lg p-4">
+        <div class="z-10 relative">
+          <div class="font-bold">
+            <p>${comment.content}</p>
+          </div>
+        </div>
+      </div>
+    `;
+        commentContainer.appendChild(commentDiv);
     });
-  }
-  
+}
+
+// prevent blank comment
+function submitCommentForm() {
+    const commentInput = document.getElementById('commentInput') as HTMLInputElement;
+    const commentValue = commentInput.value.trim();
+
+    if (commentValue === '') {
+      alert('Please enter a non-empty comment.');
+      return false; // Prevent form submission
+    } else {
+      alert('Form submitted successfully with comment: ' + commentValue);
+      return true; // Allow form submission
+    }
+}
+
+
 

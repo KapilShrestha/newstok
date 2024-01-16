@@ -1,17 +1,17 @@
 
 <!-- frontend/auth/admin-add-posts.html -->
-<h2>Add posts</h2>
+<h1 class="font-bold p-4">Admin Add Post</h1>
 
-<div>
+<div class="pl-6">
     <form id="admin-add-post" action="" method="post" enctype="multipart/form-data">
         <div class="w-6/12">
             <div class="mb-4 grid grid-cols-2 items-center">
-                <label for="title" class="">Title</label>
+                <label for="title" class="font-bold" >Title</label>
                 <input id="post-title-input" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
             </div>
             <div class="mb-4 grid grid-cols-2 items-center">
-                <label for="category" class="">Category</label>
-                <select id="post-category-select" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs">
+                <label for="category" class="font-bold">Category</label>
+                <select id="post-category-select" type="text" placeholder="Title" class="input input-bordered w-full max-w-xs">
                 <!-- options from categories listed here -->
                 </select>
             </div>
@@ -21,8 +21,8 @@
             </div> -->
         </div>
         <div class="mb-4 w-6/12">
-            <label for="content" class="">Content</label>
-            <textarea id="post-content-input" name="content" id="content" cols="30" rows="10" placeholder="Content" class="rounded border border-gray-700 w-full py-2 px-3 focus:outline-none focus:border-gray-500" required></textarea>
+            <label for="content" class="font-bold">Content</label>
+            <textarea id="post-content-input" name="content" id="content" cols="30" rows="10" placeholder="Short Description" class="rounded border border-gray-700 w-full py-2 px-3 focus:outline-none focus:border-gray-500" required></textarea>
         </div>     
         <div class="mb-4">
             <button id="add-post-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add post</button>
